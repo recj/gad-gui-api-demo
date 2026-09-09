@@ -347,7 +347,16 @@ function deactivateUserData(userId) {
     replaceUser(userId, user);
   }
 
-  const collections = ["userEnrollments", "lessonProgress", "userStats", "certificates", "userRatings", "fundsHistory"];
+  const collections = [
+    "userEnrollments",
+    "lessonProgress",
+    "userStats",
+    "certificates",
+    "userRatings",
+    "fundsHistory",
+    "quizAttempts",
+    "roleRequests",
+  ];
 
   collections.forEach((collection) => {
     const coll = data[collection];
@@ -376,6 +385,20 @@ function deleteUserData(userId) {
   }
 
   const deleted = { user: 1 };
+  const instructorCourses = data.courses.filter((course) => areIdsEqual(course.instructorId, userId));
+  if (user.role === "instructor" && instructorCourses.length > 0) {
+    deleted.courses = instructorCourses.length;
+    instructorCourses.forEach((course) => {
+      const courseResult = deleteCourseData(course.id);
+      Object.entries(courseResult.deleted).forEach(([collectionName, count]) => {
+        if (collectionName === "course") {
+          return;
+        }
+        deleted[collectionName] = (deleted[collectionName] || 0) + count;
+      });
+    });
+  }
+
   data.users = data.users.filter((item) => !areIdsEqual(item.id, userId));
 
   Object.keys(dataProxy.getAllData()).forEach((collectionName) => {
@@ -397,6 +420,8 @@ function deleteUserData(userId) {
     deleted.failedLoginAttempts = 1;
     data.failedLoginAttempts = failedLoginAttempts;
   }
+
+  recalculateStudentsCount();
 
   return { success: true, deleted };
 }
