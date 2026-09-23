@@ -66,7 +66,7 @@ describe('Learning Endpoints (core flows)', () => {
       expect(response.body).toHaveProperty('title')
     })
 
-        it('DELETE /api/learning/admin/users/3/delete should remove the user and its dependencies', async () => {
+    it('DELETE /api/learning/admin/users/3/delete should remove the user and its dependencies', async () => {
       await request(baseUrl).get('/api/learning/system/restore').expect(200)
 
       const adminLogin = await request(baseUrl)
