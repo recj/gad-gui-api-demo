@@ -1,0 +1,141 @@
+/* UI Lab — self-contained styles for /learning/ui-lab.html
+   Scoped with the .ui-lab-* prefix so it never leaks into other pages. */
+
+.ui-lab-container {
+  padding: 0 20px;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.ui-lab-title {
+  color: var(--text-dark);
+  margin: 0 0 8px;
+}
+
+.ui-lab-intro {
+  color: var(--text-light);
+  margin: 0 0 20px;
+}
+
+.ui-lab-section {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.ui-lab-section h3 {
+  margin: 0 0 10px;
+  color: var(--text-dark);
+}
+
+.ui-lab-section p {
+  margin: 0 0 12px;
+  color: var(--text-light);
+}
+
+.ui-lab-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.ui-lab-output {
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 12px 0 0;
+  min-height: 20px;
+  color: var(--text-dark);
+  word-break: break-word;
+}
+
+.ui-lab-state {
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* Wrapper so the sticky "ad" can overlap the Start button deterministically. */
+.ui-lab-start-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.ui-lab-ad {
+  position: absolute;
+  inset: -8px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.ui-lab-ad-close {
+  border: none;
+  background: rgb(0 0 0 / 25%);
+  color: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.ui-lab-frame {
+  width: 100%;
+  height: 230px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* Random promo interstitial (full-screen overlay that blocks the page). */
+.ui-lab-promo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgb(15 23 42 / 55%);
+}
+
+.ui-lab-promo.visible {
+  display: flex;
+}
+
+.ui-lab-promo-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 30%);
+}
+
+.ui-lab-promo-card h3 {
+  margin: 0 0 10px;
+  color: var(--text-dark);
+}
+
+.ui-lab-promo-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
