@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>UI Lab Frame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 16px;
+            color: #1e293b;
+        }
+
+        h3 {
+            margin: 0 0 12px;
+        }
+
+        input {
+            padding: 6px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #frame-output {
+            font-family: "Courier New", monospace;
+            background: #f1f5f9;
+            border: 1px dashed #cbd5e1;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 id="frame-title" data-testid="frame-title">UI Lab Frame Content</h3>
+    <label for="frame-input">Nickname</label>
+    <input id="frame-input" type="text" aria-label="Nickname" />
+    <button id="frame-apply" data-testid="frame-apply">Apply</button>
+    <p id="frame-output" data-testid="frame-output">empty</p>
+
+    <script>
+        document.getElementById("frame-apply").addEventListener("click", function () {
+            var value = document.getElementById("frame-input").value;
+            document.getElementById("frame-output").textContent = "hello " + value;
+        });
+    </script>
+</body>
+
+</html>
