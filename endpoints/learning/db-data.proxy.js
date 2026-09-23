@@ -199,8 +199,8 @@ class DataProxy {
 
   restoreToDefault() {
     try {
-      // Reset memory data to mock data
-      this.memoryData = { ...this.mockDataSource };
+      // Reset memory data to mock data (deep clone to avoid mutating the shared mock)
+      this.memoryData = JSON.parse(JSON.stringify(this.mockDataSource));
       this.isInitialized = true;
 
       // Persist to file
