@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>🦎 GAD | UI Lab - Hard UI Cases</title>
+    <link rel="icon" href="/data/icons/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="/css/fonts/fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/controls.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="./css/learning.css" />
+    <link rel="stylesheet" href="./css/ui-lab.css" />
+</head>
+
+<body>
+    <header>
+        <div style="display: grid; grid-template-columns: 4fr 1fr" class="main-nav-menu">
+            <h1 id="menu-main-gui-learning" class="nav-menu"></h1>
+        </div>
+    </header>
+    <br />
+    <br />
+    <br />
+    <a href="/learning/welcome.html" class="hero-link">
+        <img src="/data/learning/gad-learning-logo.png" alt="GAD Learning" class="hero-logo hero-absolute" aria-label="GAD Learning" title="GAD Learning">
+    </a>
+    <main class="dashboard-container">
+        <div id="sidebarContainer"></div>
+
+        <div class="ui-lab-container">
+            <h2 class="ui-lab-title" data-testid="ui-lab-title">UI Lab — Hard UI Cases</h2>
+            <p class="ui-lab-intro">
+                A single flow that exercises common hard cases in UI automation: random promos,
+                click interception, native dialogs, iframes, new tabs and downloads.
+            </p>
+
+            <!-- 1. Random promo + click interception -->
+            <section class="ui-lab-section" id="ui-lab-promo-section">
+                <h3>1. Dynamic promo &amp; click interception</h3>
+                <p>
+                    A promotional interstitial may appear after a random delay (use
+                    <code>?promo=always|never|random</code>). A sticky ad overlaps the Start button
+                    until it is dismissed.
+                </p>
+                <div class="ui-lab-row">
+                    <div class="ui-lab-start-wrap">
+                        <button id="ui-lab-start" class="primary-button" data-testid="start-flow" disabled>
+                            Start flow
+                        </button>
+                        <div id="ui-lab-ad" class="ui-lab-ad" data-testid="sticky-ad">
+                            <span>Sponsored</span>
+                            <button id="ui-lab-ad-close" class="ui-lab-ad-close" data-testid="ad-close"
+                                aria-label="Close ad" title="Close ad">&times;</button>
+                        </div>
+                    </div>
+                    <span id="ui-lab-promo-state" class="ui-lab-state" data-testid="promo-state">promo:waiting</span>
+                </div>
+            </section>
+
+            <!-- 2. Native dialogs -->
+            <section class="ui-lab-section" id="ui-lab-dialog-section">
+                <h3>2. Native dialogs</h3>
+                <p>Triggers the browser-native alert, confirm and prompt dialogs.</p>
+                <div class="ui-lab-row">
+                    <button id="ui-lab-alert" class="secondary-button" data-testid="alert-trigger">
+                        Trigger alert
+                    </button>
+                    <button id="ui-lab-confirm" class="secondary-button" data-testid="confirm-trigger">
+                        Trigger confirm
+                    </button>
+                    <button id="ui-lab-prompt" class="secondary-button" data-testid="prompt-trigger">
+                        Trigger prompt
+                    </button>
+                </div>
+                <p id="ui-lab-dialog-result" class="ui-lab-output" data-testid="dialog-result">none</p>
+            </section>
+
+            <!-- 3. Iframe -->
+            <section class="ui-lab-section" id="ui-lab-frame-section">
+                <h3>3. Iframe</h3>
+                <p>Same-origin iframe with its own input, button and output.</p>
+                <iframe id="ui-lab-frame" class="ui-lab-frame" data-testid="lab-frame"
+                    src="./ui-lab-frame.html" title="UI Lab Frame"></iframe>
+            </section>
+
+            <!-- 4. New tab -->
+            <section class="ui-lab-section" id="ui-lab-tab-section">
+                <h3>4. New tab</h3>
+                <p>Opens the UI Lab Handbook in a new tab (anchor) or a new window (window.open).</p>
+                <div class="ui-lab-row">
+                    <a id="ui-lab-handbook-link" class="primary-button" data-testid="handbook-link"
+                        href="./ui-lab-handbook.html" target="_blank" rel="noopener">
+                        Open handbook (link)
+                    </a>
+                    <button id="ui-lab-open-tab" class="secondary-button" data-testid="open-tab">
+                        Open handbook (window.open)
+                    </button>
+                </div>
+            </section>
+
+            <!-- 5. Download -->
+            <section class="ui-lab-section" id="ui-lab-download-section">
+                <h3>5. Download</h3>
+                <p>Downloads a server file (sample.txt) and a client-generated CSV (blob).</p>
+                <div class="ui-lab-row">
+                    <a id="ui-lab-download-server" class="primary-button" data-testid="download-server"
+                        href="/api/practice/download/path/sample.txt" download>
+                        Download sample.txt (server)
+                    </a>
+                    <button id="ui-lab-download-blob" class="secondary-button" data-testid="download-blob">
+                        Download report (blob)
+                    </button>
+                </div>
+            </section>
+
+            <p id="ui-lab-status" class="ui-lab-output" data-testid="ui-lab-status">status:ready</p>
+        </div>
+    </main>
+
+    <button class="mobile-menu-button" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay"></div>
+
+    <!-- Random promotional interstitial -->
+    <div id="ui-lab-promo" class="ui-lab-promo" data-testid="promo" role="dialog" aria-modal="true"
+        aria-label="Special offer" style="display: none;">
+        <div class="ui-lab-promo-card">
+            <h3 data-testid="promo-title">Limited time offer!</h3>
+            <p>Enroll today and get 20% off your next course. This offer disappears quickly.</p>
+            <div class="ui-lab-promo-actions">
+                <button id="ui-lab-promo-close" class="secondary-button" data-testid="promo-close">
+                    No thanks
+                </button>
+                <button id="ui-lab-promo-accept" class="primary-button" data-testid="promo-accept">
+                    Claim offer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/header.js"></script>
+    <script type="text/javascript" src="/version.js"></script>
+    <script type="text/javascript" src="/username.js"></script>
+    <script type="text/javascript" src="/js/message-notifier.js"></script>
+
+    <script src="./js/services/api.js"></script>
+    <script src="./js/utils/notifications.js"></script>
+    <script src="./js/components/sidebar.js"></script>
+    <script src="./js/sidebar.js"></script>
+    <script src="./js/hamburger-menu.js"></script>
+    <script src="./js/auth-check.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/ui-lab.js"></script>
+</body>
+
+</html>
